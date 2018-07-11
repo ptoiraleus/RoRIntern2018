@@ -5,11 +5,11 @@ class Post < ActiveRecord::Base
   validates :content, length: { in: 10..500 }
 
   scope :old, ->{where('created_at > ?', 40.minute)}
-  has_many :author_posts
-  has_many :authors, through: :author_posts
+  # has_many :author_posts
+  # has_many :authors, through: :author_posts
   has_many :comments
 
-  # belongs_to :author
+  belongs_to :author
   # before_create :annotate_author
   #
   # def annotate_author
