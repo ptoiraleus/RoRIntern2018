@@ -2,7 +2,8 @@ class Author < ActiveRecord::Base
   validates :name, :surname, length: { in: 3..20 }
   validates :name, :surname, presence: true
 
-  scope :old, -> { where('age > 30')}
+  scope :old, -> { where('age > 30') }
+  scope :young, -> { where('age < 20') }
 
   before_create :default_age
 

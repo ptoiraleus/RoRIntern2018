@@ -53,14 +53,19 @@ RSpec.describe Post, type: :model do
 
 
   describe 'scopes' do
+    #let(:author) { Author.create(name: 'tester', surname: 'tester') }
+    #let(:author) { create(:author) }
+    #let(:test_text) { 'a'*10 }
+
     it 'should have old scope' do
-      author = Author.create(name:'tester', surname: 'tester')
       new_time = Time.now - 120.minute
-      Timecop.freeze(new_time)
-      post1 = Post.create(title: 'test1', content: 'testtesttesttest', author_id: author.id)
+      Timecop.freeze(new_time)  #used Timecop here, it is gem used to help with Time mocking
+      #post1 = Post.create(title: 'test1', content: test_text, author_id: author.id)
+      post1 = create(:post, title: 'Test1')
       new_time = Time.now
       Timecop.return
-      post2 = Post.create(title: 'test2', content: 'testtesttesttest', author_id: author.id)
+      #post2 = Post.create(title: 'test2', content: test_text, author_id: author.id)
+      post2 = create(:post, title: 'Test2')
       expect(Post.old).to include(post1)
       expect(Post.old).not_to include(post2)
     end
