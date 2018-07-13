@@ -36,12 +36,13 @@ class AuthorsController < ApplicationController
   end
 
   def destroy
-    author = Author.find(params[:id])
-    if author.destroy
-      redirect_to authors_path, notice: 'Author deleted'
-    else
-      redirect_to authors_path, alert: 'There was an error'
-    end
+    @author = Author.find(params[:id])
+    @author.destroy
+    # if author.destroy
+    #   redirect_to authors_path, notice: 'Author deleted'
+    # else
+    #   redirect_to authors_path, alert: 'There was an error'
+    # end
   end
 
   private
