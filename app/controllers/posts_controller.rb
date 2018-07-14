@@ -1,20 +1,31 @@
 class PostsController < ApplicationController
+
   def index
     @posts = Post.all
+    @post = Post.new
   end
 
   def show
     @post = Post.find(params[:id])
-    @author = Author.find(@post.author_id)
+    if Author.exists?(@post.author_id)
+      @author = Author.find(@post.author_id)
+    else
+      @author = Author.new(name: "doesn't exist")
+    end
+
+    @comments = Comment.where(post_id: @post.id)
+    @comment = Comment.new
+    @authors = Author.all
   end
 
   def new
     @post = Post.new
-    @author = Author.all
+    @authors = Author.all
   end
 
   def create
     @post = Post.new(post_params)
+    @authors = Author.all
     if @post.save
       redirect_to posts_path, notice: 'Post Created'
     else
@@ -24,11 +35,12 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
-    @author = Author.all
+    @authors = Author.all
   end
 
   def update
     @post = Post.find(params[:id])
+    @authors = Author.all
     if @post.update(post_params)
       redirect_to posts_path, notice: 'Post Updated'
     else
@@ -37,12 +49,13 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    post = Post.find(params[:id])
-    if post.destroy
-      redirect_to posts_path, notice: 'Post deleted'
-    else
-      redirect_to posts_path, alert: 'There was an error'
-    end
+    @post = Post.find(params[:id])
+    @post.destroy
+    # if post.destroy
+    #   redirect_to posts_path, notice: 'Post deleted'
+    # else
+    #   redirect_to posts_path, alert: 'There was an error'
+    # end
   end
 
   private

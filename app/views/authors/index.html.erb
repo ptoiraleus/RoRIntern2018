@@ -2,11 +2,7 @@
   <h1>All Authors</h1>
 </div>
 
-<hr/>
-
-
 <div class="container">
-
   <img
   style="display: none;"
   src="https://i.redd.it/ounq1mw5kdxy.gif" />
@@ -16,40 +12,32 @@
       <%= render 'author', author: author %>
     <%end%>
   </div>
-</div>
 
-<hr/>
-<div class="container">
-  <%= link_to 'New author', new_author_path, class: 'btn btn-primary' %>
-</div>
+  <%#= link_to 'New author', new_author_path, class: 'btn btn-primary' %>
 
+  <% if @author.errors.any? %>
+      <% @author.errors.full_messages.each do |msg| %>
+        <div class="row">
+          <%= msg %>
+        </div>
+      <% end %>
+  <% end %>
 
-<% if @author.errors.any? %>
-  <div class="container">
-    <% @author.errors.full_messages.each do |msg| %>
-      <div class="row">
-        <%= msg %>
-      </div class="row">
-    <% end %>
-  </div class="container">
-<% end %>
+  <br><br>
+  <%= form_for @author, remote: true, html: {class: 'new-author'} do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control", placeholder: "Enter Name"%>
+  </div>
+  <div class="form-group">
+    <%= f.label :surname %>
+    <%= f.text_field :surname, class: "form-control", placeholder: "Enter Surname" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :age %>
+    <%= f.number_field :age, class: "form-control" %>
+  </div>
+    <%= f.submit 'Save', class: "btn btn-primary" %>
+  <% end %>
 
-<br><br>
-<div class="container">
-<%= form_for @author, remote: true, html: {class: 'new-author'} do |f| %>
-<div class="form-group">
-  <%= f.label :name %>
-  <%= f.text_field :name, class: "form-control", placeholder: "Enter Name"%>
-</div>
-<div class="form-group">
-  <%= f.label :surname %>
-  <%= f.text_field :surname, class: "form-control", placeholder: "Enter Surname" %>
-</div>
-<div class="form-group">
-  <%= f.label :age %>
-  <%= f.number_field :age, class: "form-control" %>
-  <hr/>
-</div>
-  <%= f.submit 'Save', class: "btn btn-primary" %>
-<% end %>
 </div>
