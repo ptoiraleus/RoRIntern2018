@@ -13,7 +13,7 @@
     <%end%>
   </div>
 
-  <%= link_to 'New author', new_author_path, class: 'btn btn-primary' %>
+  <%#= link_to 'New author', new_author_path, class: 'btn btn-primary' %>
 
   <% if @author.errors.any? %>
       <% @author.errors.full_messages.each do |msg| %>

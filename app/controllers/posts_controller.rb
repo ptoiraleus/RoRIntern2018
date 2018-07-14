@@ -25,6 +25,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
+    @authors = Author.all
     if @post.save
       redirect_to posts_path, notice: 'Post Created'
     else
@@ -39,6 +40,7 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
+    @authors = Author.all
     if @post.update(post_params)
       redirect_to posts_path, notice: 'Post Updated'
     else

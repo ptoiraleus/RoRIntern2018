@@ -25,4 +25,7 @@
 </div>
   <%= f.submit 'Save', class: "btn btn-primary" %>
 <% end %>
+
+<%= link_to 'Go back', authors_path, data: { confirm: "Are you sure? You will lose all your data" }, role: 'button', class: 'btn btn-danger' %>
+
 </div>

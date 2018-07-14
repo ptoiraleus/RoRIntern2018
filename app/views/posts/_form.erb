@@ -21,4 +21,7 @@
   <%= f.select :author_id, options_for_select(@authors.collect{ |a| [a.fullname, a.id] }), {}, {class: "form-control"} %>
 </div>
   <%= f.submit 'Save', class: "btn btn-primary" %>
+
+<%= link_to 'Go back', posts_path, data: { confirm: "Are you sure? You will lose all your data" }, role: 'button', class: 'btn btn-danger' %>
+
 <% end %>
