@@ -1,0 +1,5 @@
+<div data-comment-id="<%= comment.id %>" style="margin-bottom: 20px">
+	<h5><%= Author.find(comment.author_id).fullname %></h5>
+  <p ><%= comment.content %></p>
+	<%= link_to 'Delete Comment', comment_path(id: comment.id), method: :delete, remote: true, data: { confirm: "Are you sure? You will delete this comment pernamently" },  role: 'button', class: 'btn btn-danger'%>
+</div>

@@ -1,23 +1,24 @@
 <% if @post.errors.any? %>
-  <ul>
     <% @post.errors.full_messages.each do |msg| %>
-      <li>
+      <div class="row">
         <%= msg %>
-      </li>
+      </div>
     <% end %>
-  </ul>
 <% end %>
 
+<br><br>
 <%= form_for @post do |f| %>
+<div class="form-group">
   <%= f.label :title %>
-  <%= f.text_field :title %>
-  <hr/>
+  <%= f.text_field :title, class: "form-control", placeholder: "Enter Title" %>
+</div>
+<div class="form-group">
   <%= f.label :content %>
-  <%= f.text_area :content %>
-  <hr/>
+  <%= f.text_area :content, class: "form-control", placeholder: "Fill with your content" %>
+</div>
+<div class="form-group">
   <%= f.label :author %>
-  <%= f.select :author_id, options_for_select(@author.collect{ |a| [a.fullname, a.id] }) %>
-
-  <hr/>
-  <%= f.submit 'Save' %>
+  <%= f.select :author_id, options_for_select(@authors.collect{ |a| [a.fullname, a.id] }), {}, {class: "form-control"} %>
+</div>
+  <%= f.submit 'Save', class: "btn btn-primary" %>
 <% end %>
